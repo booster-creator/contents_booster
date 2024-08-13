@@ -18,16 +18,9 @@
     async function searchVideos() {
         const query = document.getElementById('searchInput').value;
         try {
-            // Fetch 요청을 보내고 응답을 텍스트로 받아서 로그로 확인
             const response = await fetch(`/.netlify/functions/search?q=${query}`);
+            const data = await response.json();
 
-            const textResponse = await response.text();
-            console.log('Response Text:', textResponse);
-
-            // JSON으로 파싱 시도
-            const data = JSON.parse(textResponse);
-
-            // 데이터가 없는 경우 처리
             if (!data || data.length === 0) {
                 console.log('No data found for the query.');
                 return;
@@ -46,6 +39,18 @@
         const table = document.createElement('table');
         table.classList.add('results-table');
 
+        // 테이블 헤더 추가
+        const headerRow = document.createElement('tr');
+        headerRow.innerHTML = `
+            <th>Thumbnail</th>
+            <th>Title</th>
+            <th>Views</th>
+            <th>Date</th>
+            <th>Channel</th>
+            <th>Subscribers</th>
+        `;
+        table.appendChild(headerRow);
+
         videos.forEach(video => {
             const row = document.createElement('tr');
             row.classList.add('result-row');
@@ -56,7 +61,7 @@
 
             row.innerHTML = `
                 <td><img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.title}"></td>
-                <td><a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a></td>
+                <td><a href="https://www.youtube.com/watch?v=${video.id}" target="_blank">${video.snippet.title}</a></td>
                 <td>${viewCount}</td>
                 <td>${new Date(video.snippet.publishedAt).toLocaleDateString()}</td>
                 <td>${video.snippet.channelTitle}</td>
