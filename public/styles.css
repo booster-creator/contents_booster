@@ -1,82 +1,40 @@
-/* 기본 스타일 */
 body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background-color: #121212;
-    color: #FFFFFF;
+    color: #ffffff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
 }
 
-/* 컨테이너 스타일 */
-.container {
-    text-align: center;
-    padding: 20px;
-    background-color: #1E1E1E;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-/* 제목 스타일 */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-/* 설명 스타일 */
-p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-/* 검색 상자 스타일 */
-.search-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.search-box input[type="text"] {
-    padding: 10px 15px;
-    font-size: 1rem;
-    border-radius: 25px 0 0 25px;
-    border: none;
-    outline: none;
-    background-color: #333;
-    color: #FFF;
+input[type="text"] {
+    padding: 10px;
     width: 300px;
+    margin-right: 10px;
 }
 
-.search-box button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 0 25px 25px 0;
-    border: none;
-    outline: none;
+button {
+    padding: 10px;
     background-color: #6200EE;
-    color: #FFF;
+    color: white;
+    border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border-radius: 5px;
 }
 
-.search-box button:hover {
+button:hover {
     background-color: #3700B3;
 }
 
-/* 검색 결과 스타일 */
-.video-item {
-    margin: 10px 0;
+#results {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
 }
 
-.video-item a {
-    color: #BB86FC;
-    text-decoration: none;
-    font-size: 1.1rem;
-}
-
-.video-item a:hover {
-    text-decoration: underline;
+img {
+    max-width: 100%;
 }
