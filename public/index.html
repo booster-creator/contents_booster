@@ -17,9 +17,29 @@
     <script>
     async function searchVideos() {
         const query = document.getElementById('searchInput').value;
-        const response = await fetch(`/.netlify/functions/search?q=${query}`);
-        const data = await response.json();
-        displayResults(data);
+        try {
+            // Fetch 요청을 보내고 응답을 JSON으로 변환
+            const response = await fetch(`/.netlify/functions/search?q=${query}`);
+
+            // 응답이 정상인지 확인
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            // JSON 데이터를 파싱
+            const data = await response.json();
+            
+            // 데이터가 없는 경우 처리
+            if (!data || data.length === 0) {
+                console.log('No data found for the query.');
+                return;
+            }
+
+            // 검색 결과를 화면에 표시
+            displayResults(data);
+        } catch (error) {
+            console.error('Error during search:', error);
+        }
     }
 
     function displayResults(videos) {
