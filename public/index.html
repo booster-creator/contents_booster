@@ -26,15 +26,26 @@
         const resultsDiv = document.getElementById('results');
         resultsDiv.innerHTML = ''; // 이전 결과 제거
 
+        const table = document.createElement('table');
+        table.classList.add('results-table');
+
         videos.forEach(video => {
-            const videoElement = document.createElement('div');
-            videoElement.innerHTML = `
-                <h2>${video.snippet.title}</h2>
-                <p>${video.snippet.description}</p>
-                <img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.title}">
+            const row = document.createElement('tr');
+            row.classList.add('result-row');
+
+            row.innerHTML = `
+                <td><img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.title}"></td>
+                <td><a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a></td>
+                <td>${video.statistics ? video.statistics.viewCount : 'N/A'}</td>
+                <td>${new Date(video.snippet.publishedAt).toLocaleDateString()}</td>
+                <td>${video.snippet.channelTitle}</td>
+                <td>${video.statistics ? video.statistics.subscriberCount : 'N/A'}</td>
             `;
-            resultsDiv.appendChild(videoElement);
+
+            table.appendChild(row);
         });
+
+        resultsDiv.appendChild(table);
     }
     </script>
 </body>
