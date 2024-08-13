@@ -13,6 +13,10 @@ input[type="text"] {
     padding: 10px;
     width: 300px;
     margin-right: 10px;
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
 }
 
 button {
@@ -33,6 +37,8 @@ button:hover {
     width: 100%;
     max-width: 800px;
     text-align: left;
+    max-height: 500px; /* 최대 높이를 설정 */
+    overflow-y: auto; /* 스크롤 활성화 */
 }
 
 .results-table {

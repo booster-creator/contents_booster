@@ -50,13 +50,17 @@
             const row = document.createElement('tr');
             row.classList.add('result-row');
 
+            // View count와 Subscriber count가 있는지 확인하고 없는 경우 'N/A' 표시
+            const viewCount = video.statistics && video.statistics.viewCount ? video.statistics.viewCount : 'N/A';
+            const subscriberCount = video.statistics && video.statistics.subscriberCount ? video.statistics.subscriberCount : 'N/A';
+
             row.innerHTML = `
                 <td><img src="${video.snippet.thumbnails.default.url}" alt="${video.snippet.title}"></td>
                 <td><a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a></td>
-                <td>${video.statistics ? video.statistics.viewCount : 'N/A'}</td>
+                <td>${viewCount}</td>
                 <td>${new Date(video.snippet.publishedAt).toLocaleDateString()}</td>
                 <td>${video.snippet.channelTitle}</td>
-                <td>${video.statistics ? video.statistics.subscriberCount : 'N/A'}</td>
+                <td>${subscriberCount}</td>
             `;
 
             table.appendChild(row);
