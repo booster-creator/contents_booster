@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boost Your Views on YouTube</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Boost Your Views on YouTube</h1>
+        <p>Search for the keyword</p>
+        <div class="search-box">
+            <input type="text" id="query" placeholder="Enter your keyword here...">
+            <button onclick="searchVideos()">Generate</button>
+        </div>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        async function searchVideos() {
+            const query = document.getElementById('query').value;
+            const response = await fetch(`/search?q=${query}`);
+            const data = await response.json();
+
+            displayResults(data.items);
+        }
+
+        function displayResults(videos) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            videos.forEach(video => {
+                const videoTitle = video.snippet.title;
+                const videoId = video.id.videoId;
+                const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+                
+                const videoElement = document.createElement('div');
+                videoElement.classList.add('video-item');
+                videoElement.innerHTML = `<h2><a href="${videoUrl}" target="_blank">${videoTitle}</a></h2>`;
+                resultsDiv.appendChild(videoElement);
+            });
+        }
+    </script>
+</body>
+</html>
